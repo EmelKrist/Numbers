@@ -9,12 +9,11 @@ public class Start {
      * - объект класса scanner для ввода данных;
      */
     static int n;
-    static int[] numbers;
     static Scanner nINPUT = new Scanner(System.in);
-
+    static int[] numbers; 
+     
     public Start() {
-        inputNumbers(); //вызываем метод для вода данных
-        Calculations(); //вызываем метод для проведения вычислений     
+       inputNumbers(); //вызываем метод для вода данных    
     }
 
     /**
@@ -26,7 +25,13 @@ public class Start {
             System.out.print("Enter amount of numbers: ");
             n = nINPUT.nextInt(); //воддим количество чисел
             numbers = new int[n]; //задаем размер массива чисел
-
+            
+            if(n==0){
+             //выводим результаты вычислений
+             System.out.println("Сумма чисел = 0"
+             + "\nПроизведение чисел = 0");
+             System.exit(0); //программа завершается 
+            }else{
             System.out.println("\nEnter the values of numbers: ");
             int num = 0;
             //инициализируем массив чисел
@@ -36,34 +41,15 @@ public class Start {
                 int number = nINPUT.nextInt();
                 numbers[i] = number;
                 System.out.println();
-            }
+            }}
 
         } catch (Exception e) { //в случае ошибки выводится сообщение
-            System.out.println("Допустим ввод только целых чисел!");
-            System.exit(1); //программа завершается 
+            System.out.println("Введенно некорректное значение!");
+            System.exit(0); //программа завершается 
         }
+        
+        //создаем объект класса Calculation для проведения вычислений
+        Calculation calc = new Calculation(n,numbers);
 
     }
-
-    /**
-     * Метод,отвечающий за выисление суммы и произведения заданных чисел.
-     */
-    public static void Calculations() {
-        //инициализируем меременные
-        int sum = 0; //сумма
-        int multipl = 1; //произведение
-
-        for (int i = 0; i < n; i++) { //суммируем содержимое массива
-            sum += numbers[i];
-        }
-
-        for (int i = 0; i < n; i++) { //перемножаем содержимое массива
-            multipl *= numbers[i];
-        }
-        //выводим результаты вычислений
-        System.out.println("Сумма чисел = " + sum
-                + "\nПроизведение чисел = " + multipl);
-
-    }
-
 }
